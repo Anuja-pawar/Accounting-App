@@ -7,7 +7,7 @@ def get_data():
 		{
 			"module_name": "Accounting Management System",
 			"color": "grey",
-			"icon": " ",
+			"icon": "octicon octicon-file-directory",
 			"type": "module",
 			"label": _("Accounting Management System")
 		}

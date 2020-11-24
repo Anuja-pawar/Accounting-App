@@ -1,0 +1,98 @@
+{
+ "cards": [
+  {
+   "hidden": 0,
+   "label": "Account Receivable",
+   "links": "[\n    {\n        \"description\": \"Bills raised to Customers.\",\n        \"label\": \"Sales Invoice\",\n        \"name\": \"Sales Invoice\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"description\": \"Customer database.\",\n        \"label\": \"Customer\",\n        \"name\": \"Customer\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"description\": \"Bank/Cash transactions against party or for internal transfer\",\n        \"label\": \"Payment Entry\",\n        \"name\": \"Payment Entry\",\n        \"type\": \"doctype\"\n    }\n]"
+  },
+  {
+   "hidden": 0,
+   "label": "Accounts Payable",
+   "links": "[\n    {\n        \"description\": \"Bills raised by Suppliers.\",\n        \"label\": \"Purchase Invoice\",\n        \"name\": \"Purchase Invoice\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"description\": \"Supplier database.\",\n        \"label\": \"Supplier\",\n        \"name\": \"Supplier\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"description\": \"Bank/Cash transactions against party or for internal transfer\",\n        \"label\": \"Payment Entry\",\n        \"name\": \"Payment Entry\",\n        \"type\": \"doctype\"\n    }\n]"
+  },
+  {
+   "hidden": 0,
+   "label": "Financial Statements",
+   "links": "[\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Balance Sheet\",\n        \"label\": \"Balance Sheet\",\n        \"name\": \"Balance Sheet\",\n        \"type\": \"Report\"\n    },\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Trial Balance\",\n        \"label\": \"Trial Balance\",\n        \"name\": \"Trial Balance\",\n        \"type\": \"Report\"\n    },\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Profit and Loss Statement\",\n        \"label\": \"Profit and Loss Statement\",\n        \"name\": \"Profit and Loss Statement\",\n        \"type\": \"Report\"\n    }\n]"
+  }
+ ],
+ "cards_label": "",
+ "category": "Modules",
+ "charts": [],
+ "creation": "2020-10-14 13:05:06.253781",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Desk Page",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "label": "Accounting App",
+ "modified": "2020-11-09 13:03:41.043291",
+ "modified_by": "Administrator",
+ "module": "Accounting Management System",
+ "name": "Accounting App",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "List",
+   "icon": "",
+   "label": "Purchase Invoice",
+   "link_to": "Purchase Invoice",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "icon": "",
+   "label": "Sales Invoice",
+   "link_to": "Sales Invoice",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "Tree",
+   "icon": "fa fa-sitemap",
+   "label": "Chart of Accounts",
+   "link_to": "Accounts",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Items",
+   "link_to": "Item",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "Journal Entry",
+   "link_to": "Journal Entry",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "General Ledger",
+   "link_to": "General Ledger",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Balance Sheet",
+   "link_to": "Balance Sheet",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Profit and Loss Statement",
+   "link_to": "Profit and Loss Statement",
+   "type": "Report"
+  },
+  {
+   "doc_view": "",
+   "label": "Trial Balance",
+   "link_to": "Trial Balance",
+   "type": "Report"
+  }
+ ]
+}

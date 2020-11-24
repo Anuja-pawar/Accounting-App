@@ -5,10 +5,10 @@ from . import __version__ as app_version
 app_name = "accounting_app"
 app_title = "Accounting Management System"
 app_publisher = "Frappe"
-app_description = "Basic Accounting Ap"
-app_icon = " "
+app_description = "Basic Accounting App for creating double entry accounting system"
+app_icon = "octicon octicon-file-directory"
 app_color = "grey"
-app_email = "frappe@fr "
+app_email = "info@frappe.io"
 app_license = "MIT"
 
 # Includes in <head>
@@ -30,7 +30,6 @@ app_license = "MIT"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}

@@ -1,0 +1,27 @@
+<div>
+	{% for i in items %}
+	<ul style="list-style: none;">
+		<li class="m-5">
+                <div class="mb-5 row">
+                <div class="col-md-4">
+                    <div class="text-center rounded mb-5">
+						<a class="text-decoration-none" href={{i.route}}>
+                        <img class="mt-2s" src="{{i.image}}" style="width: 150px;height: 150px;" alt={{i.item_name}}></a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+					<a class="text-decoration-none" href="{{i.route}}">
+                    <h3>{{i.item_name}}</h3></a>
+                    <p class="text-truncate">
+						{% if i.description %}
+						{{i.description}}
+						{% endif %}
+                    </p>
+                    <h3>Rs. {{i.price}}</h3>
+                </div>
+            </div>
+		</li>
+	</ul>
+	{% endfor %}
+</div>
+
