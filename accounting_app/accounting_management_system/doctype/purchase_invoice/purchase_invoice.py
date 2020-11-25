@@ -9,7 +9,6 @@ from frappe.model.document import Document
 from accounting_app.accounting_management_system.update_balance import balance_account
 
 class PurchaseInvoice(Document):
-
 	def validate(self):
 		self.set_item_rate_and_amount()
 		self.set_total_quantity_and_amount()

@@ -1,7 +1,5 @@
 {% extends "templates/web.html" %}
-{%- block head_include %}
-<script type="text/javascript" src="../accounting_app/www/main.js"></script>
-{% endblock -%}
+
 {% block page_content %}
 
 <div class="row">
@@ -26,4 +24,7 @@
             </div>
         </div>
 </div>
+<script>
+    {% include "accounting_app/www/main.js" %}
+</script>
 {% endblock %}

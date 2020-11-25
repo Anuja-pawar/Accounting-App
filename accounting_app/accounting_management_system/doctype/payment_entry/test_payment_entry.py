@@ -45,7 +45,6 @@ class TestPaymentEntry(unittest.TestCase):
 		gl_entries = get_gl_entries(pe.name, "Payment Entry")
 		delete_gl_entries(gl_entries)
 		pe.delete()
-		print("hey!!!!!")
 
 
 def make_payment_entry(payment_type, save= True, submit=False):

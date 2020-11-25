@@ -3,10 +3,7 @@
 
 from __future__ import unicode_literals
 import frappe
-import re
-import functools
 from frappe import _
-from past.builtins import cmp
 from frappe.utils import flt, getdate
 
 
@@ -16,20 +13,21 @@ def execute(filters=None):
     asset = get_data("Asset", fiscal_year)
     liability = get_data("Liability", fiscal_year)
     data = []
-    data.extend(asset or [])
     if asset:
+        data.extend(asset)
         data.extend([{
             "account": "Total Assets",
             "account_balance": asset[0].account_balance
         }])
-    data.extend(liability or [])
     if liability:
+        data.extend(liability)
         data.extend([{
             "account": "Total Liabilities",
             "account_balance": liability[0].account_balance
         }])
     columns = get_columns(filters.fiscal_year)
-    return columns, data
+    summary = get_report_summary(asset[0].account_balance, liability[0].account_balance)
+    return columns, data, None, None, summary
 
 
 def get_fiscal_year(fiscal_year):
@@ -40,8 +38,8 @@ def get_data(account_type, fiscal_year):
     accounts = get_accounts(account_type)
     if not accounts:
         return None    
-    accounts, accounts_by_name = filter_accounts(accounts)
-    total_balance = get_total_account_balance(accounts_by_name, accounts)
+    accounts, accounts_by_name, parent_children_map = filter_accounts(accounts)
+    total_balance = get_parent_total_balance(accounts_by_name, accounts)
     result = prepare_data(accounts, fiscal_year)
     return result
 
@@ -51,7 +49,7 @@ def get_accounts(account_type):
     return accounts
 
 
-def get_total_account_balance(accounts_by_name, accounts):
+def get_parent_total_balance(accounts_by_name, accounts):
     for d in reversed(accounts):
         if d.get("parent_accounts"):
             accounts_by_name[d.parent_accounts]["account_balance"] = accounts_by_name[d.parent_accounts]["account_balance"] + d.account_balance
@@ -73,7 +71,7 @@ def filter_accounts(accounts, depth=10):
                 set_indent(child.name, level + 1)
 
     set_indent(None, 0)
-    return filtered_accounts, accounts_by_name
+    return filtered_accounts, accounts_by_name, parent_children_map
 
 
 def prepare_data(accounts, fiscal_year):
@@ -112,3 +110,22 @@ def get_columns(fiscal_year):
         "width": 200
     }]
     return columns
+
+
+def get_report_summary(total_asset, total_liability):
+    return [
+		{
+			"value": total_asset,
+			"indicator": "Green" if total_asset > 0 else "Red",
+			"label": "Total Asset",
+			"datatype": "Currency",
+			"currency": frappe.db.get_value("Currency", "INR", "symbol") 
+		},
+        {
+			"value": total_liability,
+			"indicator": "Green" if total_liability > 0 else "Red",
+			"label": "Total Liability",
+			"datatype": "Currency",
+			"currency": frappe.db.get_value("Currency", "INR", "symbol") 
+		}
+	]

@@ -9,7 +9,7 @@ def execute(filters=None):
 	if not filters:
 		return [], []
 	account_details = {}
-	for acc in frappe.get_all("Accounts", fields=["name", "is_group"]):
+	for acc in frappe.get_all("Accounts", fields=["*"]):
 		account_details.setdefault(acc.name, acc)
 	validate_filters(filters,account_details)
 	columns = get_columns(filters)
@@ -20,8 +20,6 @@ def execute(filters=None):
 def validate_filters(filters,account_details):
 	if filters.from_date > filters.to_date :
 		frappe.throw(_("From date must be before To date"))
-	if filters.get("transaction_no") and not account_details.get(filters.transaction_no):
-		frappe.throw(_("Transaction no. does not exist").format(filters.account))
 
 
 def get_results(filters, account_details):
@@ -42,8 +40,8 @@ def get_conditions(filters):
 	if filters.get("account"):
 		conditions.update({"account":filters.account})
 	if not (filters.get("account")):
-		conditions.update({"posting_date": ["<", filters.to_date]})
-		conditions.update({"posting_date": [">", filters.from_date]})
+		conditions.update({"posting_date": ["<=", filters.to_date]})
+		conditions.update({"posting_date": [">=", filters.from_date]})
 	if filters.get("transaction_type"):
 		conditions.update({"transaction_type":filters.transaction_type})		
 	if filters.get("transaction_no"):

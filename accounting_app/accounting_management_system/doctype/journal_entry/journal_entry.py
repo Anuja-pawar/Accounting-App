@@ -37,23 +37,19 @@ class JournalEntry(Document):
 
 	def on_cancel(self):
 		for i in self.get("account_entries"):
-			if i.debit == 0.0 :
-				balance_account_je(i.account,'0.0',i.credit)	
-			elif i.credit == 0.0 :
-				balance_account_je(i.account,i.debit,'0.0')
-				
-		self.make_reverse_gl_entry()
+			balance_account_je(i.account,i.debit,i.credit)		
+		self.make_gl_entry(reverse=True)
 
 
-	def make_gl_entry(self):
+	def make_gl_entry(self, reverse=False):
 		gl_entry= []
 		for i in self.get("account_entries"):
 			gl_entry.append({
 				"doctype":"General Ledger",
 				'posting_date' : self.posting_date,
 				'account': i.account,
-				'debit': i.debit,
-				'credit': i.credit,
+				'debit': i.debit if not reverse else i.credit ,
+				'credit': i.credit if not reverse else i.debit,
 				'account_balance': frappe.db.get_value('Accounts',i.account,'account_balance'),
 				'party': i.party,
 				'transaction_type': 'Journal Entry',
@@ -62,22 +58,4 @@ class JournalEntry(Document):
 		for row in gl_entry:
 			doc = frappe.get_doc(row)
 			doc.insert()
-	
-	
-	def make_reverse_gl_entry(self):
-		gl_entry= []
-		for i in self.get("account_entries"):
-			gl_entry.append({
-				"doctype":"General Ledger",
-				'posting_date' : self.posting_date,
-				'account': i.account,
-				'debit': i.credit,
-				'credit': i.debit,
-				'account_balance': frappe.db.get_value('Accounts',i.account,'account_balance'),
-				'party': i.party,
-				'transaction_type': 'Journal Entry',
-				'transaction_no':self.name
-			})
-		for row in gl_entry:
-			doc = frappe.get_doc(row)
-			doc.insert()
+

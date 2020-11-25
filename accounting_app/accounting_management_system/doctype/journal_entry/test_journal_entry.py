@@ -21,7 +21,6 @@ class TestJournalEntry(unittest.TestCase):
 
 	def test_journal_entry_creation(self):
 		je = make_journal_entry(100, True, True)
-		print(je.name)
 		gl_entries = get_gl_entries(je.name, "Journal Entry")
 		self.assertTrue(gl_entries)
 		expected_values = {

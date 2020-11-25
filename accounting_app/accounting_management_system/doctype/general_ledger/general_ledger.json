@@ -14,7 +14,8 @@
   "account_balance",
   "transaction_type",
   "transaction_no",
-  "against_account"
+  "against_account",
+  "is_cancelled"
  ],
  "fields": [
   {
@@ -80,11 +81,18 @@
    "in_list_view": 1,
    "label": "Posting Date",
    "search_index": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_cancelled",
+   "fieldtype": "Check",
+   "label": "Is Cancelled",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-11-02 17:40:00.919673",
+ "modified": "2020-11-24 19:18:07.658793",
  "modified_by": "Administrator",
  "module": "Accounting Management System",
  "name": "General Ledger",

@@ -25,7 +25,19 @@ def execute(filters=None):
             "account": "Total Expense",
             "account_balance": expense[0].account_balance
         }])
-    profit = income[0]['account_balance'] -  expense[0]['account_balance']
-    data.append(["Profit/ Loss (Income - Expense)", profit])
+    profit_loss = income[0]['account_balance'] -  expense[0]['account_balance']
+    data.append(["Profit/ Loss (Income - Expense)", profit_loss])
     columns = get_columns(filters.fiscal_year)
-    return columns, data
+    report_summary = get_report_summary(profit_loss)
+    return columns, data, None, None, report_summary
+
+def get_report_summary(profit_loss):
+    return [
+		{
+			"value": profit_loss,
+			"indicator": "Green" if profit_loss > 0 else "Red",
+			"label": "Net Profit/Loss",
+			"datatype": "Currency",
+			"currency": frappe.db.get_value("Currency", "INR", "symbol") 
+		}
+	]
