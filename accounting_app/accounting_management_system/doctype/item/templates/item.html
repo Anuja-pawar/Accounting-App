@@ -1,30 +1,41 @@
 {% extends "templates/web.html" %}
-
 {% block page_content %}
+{% include 'accounting_app/www/base.html' %}
+<script>
+    {% include "accounting_app/public/js/main.js" %}
+</script>
+<style>
+.add-to-cart {
+  background-color: #7cd6fd;
+  color: #FFFFFF;
+}
 
-<div class="row">
-        <div class="col-sm-6">
+.add-to-cart:hover:active {
+  opacity: 0.8;
+  color: #FFFFFF;
+}
+</style>
+<div class="d-flex flex-row">
+        <div class="p-2">
             <input type="hidden" id="item" value="{{ title }}">
             <img namclass="rounded" src="{{ image }}" alt="{{ title }}" style="width:500px;height:500px">
         </div>
-        <div class="col-sm-6">
-            <h3>{{ title }}</h3>
+        <div class="ml-2 p-2 d-flex flex-column">
+            <h4>{{ title }}</h4>
             {% if description %}
                 <p>{{ description }}</p>
             {% endif %}
             <hr>
-            <h4 class="muted">Rs. {{ price }}</h4>
-            <!-- <div class="mt-3">
+            <h4>Rs. {{ price }}</h4>
+            <div class="p-2">
                 Quantity <input type="number" value=1 id="quantity" name="quantity" min="1" max="10">
-            </div> -->
+            </div>
 
-            <div class="mt-5 align-bottom">
-                <a href="/cart"><button class="btn btn-primary btn-lg" id="add_cart" name="add_cart"><i class="fa fa-shopping-cart"></i> 
-                    Add to Cart</button></a>
+            <div class="align-self-end">
+                <button class="mr-4 btn btn-lg add-to-cart" id="add_to_cart" value="{{ name }}">
+                <i class="fa fa-shopping-cart"></i> Add to Cart
+                </button>
             </div>
         </div>
 </div>
-<script>
-    {% include "accounting_app/www/main.js" %}
-</script>
 {% endblock %}

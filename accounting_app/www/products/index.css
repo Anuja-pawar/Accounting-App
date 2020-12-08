@@ -1,0 +1,40 @@
+
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3%;
+    grid-row-gap: 3%;
+}
+.item{
+    position: relative;
+}
+.item img {
+  width: 100%;
+  height: auto;
+}
+.item .btn {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: black ;
+  color: white;
+  font-size: 16px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+  width:100%
+}
+
+.item .btn:hover {
+  opacity:100%;
+  background-color: #7cd6fd;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}

@@ -5,10 +5,10 @@
 
 frappe.ui.form.on('Purchase Invoice', {
 	validate: function(frm) {
-			if (frm.doc.due_date < get_today()) {
-			msgprint('You can not select past date in Due Date');
-			validated = false;
-			}
+        if (frm.doc.due_date < get_today()) {
+        msgprint('You can not select past date in Due Date');
+        validated = false;
+        }
 	}		 
 });
 
@@ -32,11 +32,11 @@ frappe.ui.form.on('Purchase Invoice', {
     }
 });
 
-frappe.ui.form.on('Purchase Invoice Item', 'quantity', function(frm, cdt, cdn) {
-		var child = locals[cdt][cdn];
-		child.amount = child.rate * child.quantity;
-		total(frm);
-		frm.refresh_field("Items"); 
+frappe.ui.form.on('Purchase Invoice Item', 'item_name', function(frm, cdt, cdn) {
+    var child = locals[cdt][cdn];
+    child.amount = child.rate * child.quantity;
+    total(frm);
+    frm.refresh_field("Items"); 
 });
 
 function total(frm) {

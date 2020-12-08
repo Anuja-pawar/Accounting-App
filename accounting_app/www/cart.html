@@ -1,0 +1,31 @@
+{% include 'accounting_app/www/base.html' %}
+
+<div class="cart">
+    <h3>My Cart</h3>
+    <div class="no-product d-none">
+        <h5>
+            There's nothing in your cart. 
+        </h5>
+        <h6 class="text-muted"> 
+            Let's add some <a href="/products">items</a>
+        </h6>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-12 border-right">
+            <div class="cart-items">
+                <ul class="cart-items-list list-group justify-content-between"></ul>
+            </div>
+        </div>
+        <div class="total-bill col-md-4 col-12">
+            <h4 class="">Total</h4><hr>
+            <div class="d-flex flex-column">
+                <p class="total-quantity"></p>
+                <p class="total-amount"></p>
+                <button class="mb-2 btn font-weight-bold" id="place-order" style="background-color: #7cd6fd;color:white">
+                    PLACE ORDER
+                </button>
+            </div>
+        </div>
+    </div>
+    
+</div>

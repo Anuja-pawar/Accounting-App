@@ -23,10 +23,10 @@ class SalesInvoice(Document):
 
 	def set_total_quantity_and_amount(self):
 		self.total_amount = 0
-		self.total_qty = 0
+		self.total_quantity = 0
 		for i in self.get("items"):
 			self.total_amount += i.amount
-			self.total_qty += i.quantity
+			self.total_quantity += i.quantity
 
 
 	def validate_quantity_and_rate(self):

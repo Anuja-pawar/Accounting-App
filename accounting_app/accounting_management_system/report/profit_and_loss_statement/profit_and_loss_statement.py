@@ -13,31 +13,78 @@ def execute(filters=None):
     income = get_data("Income", fiscal_year)
     expense = get_data("Expense", fiscal_year)
     data = []
-    data.extend(income or [])
     if income:
+        data.extend(income)
         data.extend([{
             "account": "Total Income",
             "account_balance": income[0].account_balance
         }])
-    data.extend(expense or [])
     if expense:
+        data.extend(expense)
         data.extend([{
             "account": "Total Expense",
             "account_balance": expense[0].account_balance
         }])
-    profit_loss = income[0]['account_balance'] -  expense[0]['account_balance']
-    data.append(["Profit/ Loss (Income - Expense)", profit_loss])
+    net_profit_loss = income[0]['account_balance'] -  expense[0]['account_balance']
+    data.append(["Profit/ Loss (Income - Expense)", net_profit_loss])
     columns = get_columns(filters.fiscal_year)
-    report_summary = get_report_summary(profit_loss)
-    return columns, data, None, None, report_summary
+    chart = get_chart_data(filters, columns, income, expense, net_profit_loss)
+    report_summary = get_report_summary(net_profit_loss, income[0].account_balance, expense[0].account_balance)
+    return columns, data, None, chart, report_summary
 
-def get_report_summary(profit_loss):
+
+def get_report_summary(net_profit_loss, total_income, total_expense):
     return [
 		{
-			"value": profit_loss,
-			"indicator": "Green" if profit_loss > 0 else "Red",
+			"value": net_profit_loss,
+			"indicator": "Green" if net_profit_loss > 0 else "Red",
 			"label": "Net Profit/Loss",
+			"datatype": "Currency",
+			"currency": frappe.db.get_value("Currency", "INR", "symbol") 
+		},
+        {
+			"value": total_income,
+			"indicator": "Green" if total_income > 0 else "Red",
+			"label": "Total Income",
+			"datatype": "Currency",
+			"currency": frappe.db.get_value("Currency", "INR", "symbol") 
+		},
+        {
+			"value": total_expense,
+			"indicator": "Green" if total_expense > 0 else "Red",
+			"label": "Total Expense",
 			"datatype": "Currency",
 			"currency": frappe.db.get_value("Currency", "INR", "symbol") 
 		}
 	]
+
+
+def get_chart_data(filters, columns, income, expense, net_profit_loss):
+	labels = [d.get("label") for d in columns[1:]]
+
+	income_data, expense_data, net_profit_loss_data = [], [], []
+
+	for p in columns[1:]:
+		if income:
+			income_data.append(income[0].get(p.get("fieldname")))
+		if expense:
+			expense_data.append(expense[0].get(p.get("fieldname")))
+	
+	net_profit_loss_data.append(net_profit_loss)
+
+	datasets = []
+	if income_data:
+		datasets.append({'name': _('Income'), 'values': income_data})
+	if expense_data:
+		datasets.append({'name': _('Expense'), 'values': expense_data})
+	if net_profit_loss_data:
+		datasets.append({'name':_('Net Profit/Loss'), 'values': net_profit_loss_data})
+		
+	chart = {
+		"data": {
+			'labels': labels,
+			'datasets': datasets
+		}
+	}
+	chart["type"] = "bar"
+	return chart

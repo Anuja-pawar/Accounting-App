@@ -6,21 +6,31 @@
 frappe.ui.form.on('Journal Entry', {
 	refresh: function (frm) {
 		custom_button(frm);
+	},
+	onload: function (frm) {
+		console.log("in setup queries!");
+		frm.set_query("account", "account_entries", function () {
+			return {
+				filters: {
+					is_group: 0
+				}
+			}
+		});	
 	}
 });
 
 frappe.ui.form.on('Journal Entry Account', {
 	account : function(frm,index,row){
-		let child  = locals[index][row];
-		if (frm.doc.difference > 0){
-			child.credit = flt(frm.doc.difference);
-			child.debit = 0.0 ;
-		}
-		else if (frm.doc.difference < 0) {
-			child.debit = flt(frm.doc.difference) * -1;
-			child.credit = flt(0.0) ;
-		}
-		total(frm);
+	let child  = locals[index][row];
+	if (frm.doc.difference > 0){
+		child.credit = flt(frm.doc.difference);
+		child.debit = 0.0 ;
+	}
+	else if (frm.doc.difference < 0) {
+		child.debit = flt(frm.doc.difference) * -1;
+		child.credit = flt(0.0) ;
+	}
+	total(frm);
 	},
 	debit: function (frm) {
 		total(frm);

@@ -1,41 +1,32 @@
-{%- block head_include %}
-<script type="text/javascript" src="main.js"></script>
-{% endblock -%}
-<!-- add-breadcrumbs -->
-<div class="">
-    <h2>Products</h2>
-        {% for i in items %}
-        <ul style="list-style: none;">
-            <li class="m-4">
-                    <div class="mb-4 row">
-                    <div class="col-md-4">
-                        <div class="text-center mb-5">
-                            <a class="text-decoration-none" href={{i.route}}>
-                            <img class="rounded" src="{{i.image}}" style="max-height:200px;" alt={{i.item_name}}></a>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <a class="text-decoration-none" href="{{i.route}}">
-                        <h3>{{i.item_name}}</h3></a>
-                        <p class="text-truncate">
-                            {% if i.description %}
-                            {{i.description}}
-                            {% endif %}
-                        </p>
-                        <h3>Rs. {{i.price}}</h3>
-                        <div>
-                            <input type="hidden" id="item" value="{{ i.item_name }}">
-                            <a class="mr-4" href="/cart" id="add_cart" name="add_cart">
-                                Add to Cart
-                            </a>
-                            <a href="{{i.route}}" id="add_cart" name="add_cart">
-                                View Product
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        {% endfor %}    
-    
+{% include 'accounting_app/www/base.html' %}
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+    {% include "accounting_app/public/js/main.js" %}
+</script>
+
+<h3>Items</h3>
+<div class="item-list">
+    {% for i in items %}
+    <div class="item">
+        <div class="mb-2">
+            <a class="text-decoration-none" href={{i.route}}>
+                <img class="" src="{{i.image}}" alt={{i.item_name}}>
+            </a>
+            <button class="add-to-cart btn" value="{{ i.item_name }}">
+                Add to Cart
+            </button>
+        </div>
+        <div class="d-flex flex-column pt-4">
+            <p><a class="text-decoration-none font-weight-bold" href="{{i.route}}">
+            {{i.item_name}}
+            </a></br>
+                {% if i.description %}
+                {{i.description}}
+                {% endif %}
+            </p>
+            <p class="font-weight-bold">Rs. {{i.price}}</p>
+        </div>
+    </div>
+    {% endfor %}    
+
 </div>

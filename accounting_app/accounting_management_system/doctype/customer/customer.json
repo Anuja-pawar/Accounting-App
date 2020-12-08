@@ -9,7 +9,8 @@
   "naming_series",
   "customer_name",
   "customer_type",
-  "image"
+  "image",
+  "email"
  ],
  "fields": [
   {
@@ -40,11 +41,17 @@
    "label": "Series",
    "options": "CUST-.YYYY.-",
    "reqd": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "Email",
+   "unique": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-11-02 11:58:11.503039",
+ "modified": "2020-11-26 19:57:14.312555",
  "modified_by": "Administrator",
  "module": "Accounting Management System",
  "name": "Customer",
