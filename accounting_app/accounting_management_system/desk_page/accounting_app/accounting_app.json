@@ -13,7 +13,7 @@
   {
    "hidden": 0,
    "label": "Financial Statements",
-   "links": "[\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Balance Sheet\",\n        \"label\": \"Balance Sheet\",\n        \"name\": \"Balance Sheet\",\n        \"type\": \"Report\"\n    },\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Trial Balance\",\n        \"label\": \"Trial Balance\",\n        \"name\": \"Trial Balance\",\n        \"type\": \"Report\"\n    },\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Profit and Loss Statement\",\n        \"label\": \"Profit and Loss Statement\",\n        \"name\": \"Profit and Loss Statement\",\n        \"type\": \"Report\"\n    }\n]"
+   "links": "[\n    {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Balance Sheet\",\n        \"label\": \"Balance Sheet\",\n        \"name\": \"Balance Sheet\",\n        \"type\": \"Report\"\n    },\n       {\n        \"dependencies\":[\n            \"General Ledger\"\n            ],\n        \"doctype\":\"General Ledger\",\n        \"is_query_report\":true,\n        \"description\": \"Profit and Loss Statement\",\n        \"label\": \"Profit and Loss Statement\",\n        \"name\": \"Profit and Loss Statement\",\n        \"type\": \"Report\"\n    }\n]"
   }
  ],
  "cards_label": "",
@@ -29,7 +29,7 @@
  "idx": 0,
  "is_standard": 1,
  "label": "Accounting App",
- "modified": "2020-11-09 13:03:41.043291",
+ "modified": "2020-12-30 19:35:41.043291",
  "modified_by": "Administrator",
  "module": "Accounting Management System",
  "name": "Accounting App",
